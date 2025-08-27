@@ -1,0 +1,704 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Maven Roasters - Interactive Dashboard&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.5/babel.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.dashboard-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1200px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 25px 50px rgba(0,0,0,0.15);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.dashboard-header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.dashboard-header h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -1px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.dashboard-header p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 10px 0 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.dashboard-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-tabs {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-tab {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 4px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-tab.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-tab:not(.active) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #6c757d;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-tab:hover:not(.active) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #495057;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255,255,255,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.dashboard-main {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.clock-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.clock-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 30px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.clock-info {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-name {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.operating-hours {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #6c757d;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.legend-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0,0,0,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 250px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.legend-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.legend-gradient {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 10px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.legend-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.legend-labels {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #6c757d;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-panel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0,0,0,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.evening-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-left: 4px solid #f39c12;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.comparison-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.selected-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.instructions-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-row {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #495057;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.highlight-text {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #e67e22;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.comparison-list {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>list-style: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.comparison-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.comparison-item:last-child {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.location-highlight {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #3498db;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.dashboard-main {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.location-tabs {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.location-tab {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 8px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.dashboard-header h1 {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.dashboard-content {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="root"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const { useState } = React;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const EfficiencyDashboard = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Data for each location (6AM-6PM = 12 hours)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const locationData = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'Hell\'s Kitchen': {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>color: 'red',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>closingTime: '8PM',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hourlyData: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>6: { revenue: 2840, efficiency: 92.3, label: '6' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>7: { revenue: 4230, efficiency: 137.4, label: '7' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>8: { revenue: 6320, efficiency: 205.2, label: '8' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>9: { revenue: 7450, efficiency: 241.8, label: '9' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>10: { revenue: 8030, efficiency: 260.7, label: '10' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>11: { revenue: 8920, efficiency: 289.6, label: '11' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>12: { revenue: 8540, efficiency: 277.3, label: '12' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>13: { revenue: 7150, efficiency: 232.1, label: '1' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>14: { revenue: 6110, efficiency: 198.4, label: '2' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>15: { revenue: 5630, efficiency: 182.8, label: '3' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>16: { revenue: 5080, efficiency: 164.9, label: '4' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>17: { revenue: 4560, efficiency: 148.0, label: '5' }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>eveningRevenue: 3420,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>eveningEfficiency: 55.6</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'Astoria': {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>color: 'blue',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>closingTime: '7PM',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hourlyData: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>7: { revenue: 4120, efficiency: 145.2, label: '7' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>8: { revenue: 6180, efficiency: 217.8, label: '8' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>9: { revenue: 7220, efficiency: 254.6, label: '9' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>10: { revenue: 7890, efficiency: 278.2, label: '10' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>11: { revenue: 8760, efficiency: 308.8, label: '11' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>12: { revenue: 8340, efficiency: 294.0, label: '12' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>13: { revenue: 6980, efficiency: 246.1, label: '1' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>14: { revenue: 5940, efficiency: 209.3, label: '2' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>15: { revenue: 5460, efficiency: 192.4, label: '3' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>16: { revenue: 4920, efficiency: 173.4, label: '4' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>17: { revenue: 4380, efficiency: 154.4, label: '5' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>18: { revenue: 3850, efficiency: 135.7, label: '6' }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>eveningRevenue: 2140,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>eveningEfficiency: 75.4</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'Lower Manhattan': {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>color: 'green',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>closingTime: '8PM',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hourlyData: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>6: { revenue: 3180, efficiency: 103.2, label: '6' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>7: { revenue: 4890, efficiency: 158.7, label: '7' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>8: { revenue: 6450, efficiency: 209.4, label: '8' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>9: { revenue: 7670, efficiency: 248.9, label: '9' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>10: { revenue: 8190, efficiency: 265.8, label: '10' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>11: { revenue: 9100, efficiency: 295.4, label: '11' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>12: { revenue: 8660, efficiency: 281.1, label: '12' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>13: { revenue: 7320, efficiency: 237.7, label: '1' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>14: { revenue: 6270, efficiency: 203.5, label: '2' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>15: { revenue: 5800, efficiency: 188.2, label: '3' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>16: { revenue: 5240, efficiency: 170.0, label: '4' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>17: { revenue: 4690, efficiency: 152.2, label: '5' }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>eveningRevenue: 3180,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>eveningEfficiency: 51.6</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const [selectedLocation, setSelectedLocation] = useState('Hell\'s Kitchen');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const [selectedHour, setSelectedHour] = useState(null);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const currentData = locationData[selectedLocation];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Color functions for each location - MUCH more varied spectrum</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const getColor = (efficiency, locationColor) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const minEff = 50;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const maxEff = 300;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const intensity = Math.max(0, Math.min(1, (efficiency - minEff) / (maxEff - minEff)));</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (locationColor === 'red') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.2) return `rgb(255, 230, 230)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.4) return `rgb(255, 180, 180)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.6) return `rgb(255, 100, 100)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.8) return `rgb(220, 50, 50)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return `rgb(150, 20, 20)`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (locationColor === 'blue') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.2) return `rgb(230, 240, 255)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.4) return `rgb(180, 200, 255)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.6) return `rgb(100, 150, 255)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.8) return `rgb(50, 100, 220)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return `rgb(20, 50, 150)`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.2) return `rgb(230, 255, 230)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.4) return `rgb(180, 255, 180)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.6) return `rgb(100, 255, 100)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (intensity &lt; 0.8) return `rgb(50, 200, 50)`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return `rgb(20, 120, 20)`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const renderClockSegment = (hour, data) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const hourNum = parseInt(hour);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let clockPosition;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (hourNum === 6) clockPosition = 6;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 7) clockPosition = 7;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 8) clockPosition = 8;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 9) clockPosition = 9;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 10) clockPosition = 10;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 11) clockPosition = 11;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 12) clockPosition = 12;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 13) clockPosition = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 14) clockPosition = 2;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 15) clockPosition = 3;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 16) clockPosition = 4;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (hourNum === 17) clockPosition = 5;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const angle = (clockPosition * 30) - 90;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const nextAngle = angle + 30;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const radius = 120;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const centerX = 150;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const centerY = 150;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const startAngleRad = angle * Math.PI / 180;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const endAngleRad = nextAngle * Math.PI / 180;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const x1 = centerX + Math.cos(startAngleRad) * radius;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const y1 = centerY + Math.sin(startAngleRad) * radius;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const x2 = centerX + Math.cos(endAngleRad) * radius;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const y2 = centerY + Math.sin(endAngleRad) * radius;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const pathData = [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`M ${centerX} ${centerY}`,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`L ${x1} ${y1}`,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`A ${radius} ${radius} 0 0 1 ${x2} ${y2}`,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'Z'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>].join(' ');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const textAngle = angle + 15;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const textRadius = 80;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const textAngleRad = textAngle * Math.PI / 180;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const textX = centerX + Math.cos(textAngleRad) * textRadius;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const textY = centerY + Math.sin(textAngleRad) * textRadius;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>return React.createElement('g', { key: hour }, [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>React.createElement('path', {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>key: `path-${hour}`,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>d: pathData,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fill: getColor(data.efficiency, currentData.color),</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stroke: '#fff',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>strokeWidth: '2',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>style: { cursor: 'pointer', transition: 'opacity 0.3s ease' },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>onClick: () =&gt; setSelectedHour(hour),</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>onMouseEnter: (e) =&gt; e.target.style.opacity = '0.8',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>onMouseLeave: (e) =&gt; e.target.style.opacity = '1'</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>React.createElement('text', {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>key: `text-${hour}`,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>x: textX,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: textY,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>textAnchor: 'middle',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>dominantBaseline: 'middle',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fontSize: '12',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fontWeight: 'bold',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fill: 'white',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>style: {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>textShadow: '1px 1px 2px rgba(0,0,0,0.7)',<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>pointerEvents: 'none'<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, `$${Math.round(data.efficiency)}`)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const renderHourLabels = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return Object.entries(currentData.hourlyData).map(([hour, data]) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const hourNum = parseInt(hour);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let clockPosition;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (hourNum === 6) clockPosition = 6;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 7) clockPosition = 7;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 8) clockPosition = 8;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 9) clockPosition = 9;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 10) clockPosition = 10;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 11) clockPosition = 11;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 12) clockPosition = 12;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 13) clockPosition = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 14) clockPosition = 2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 15) clockPosition = 3;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 16) clockPosition = 4;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 17) clockPosition = 5;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const angle = (clockPosition * 30) - 90;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const radius = 140;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const centerX = 150;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const centerY = 150;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const angleRad = angle * Math.PI / 180;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const x = centerX + Math.cos(angleRad) * radius;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const y = centerY + Math.sin(angleRad) * radius;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let displayHour;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (hourNum === 6) displayHour = '6';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum &lt;= 11) displayHour = `${hourNum}AM`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (hourNum === 12) displayHour = '12PM';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else displayHour = `${hourNum - 12}PM`;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return React.createElement('text', {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>key: `label-${hour}`,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>x: x,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: y,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>textAnchor: 'middle',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>dominantBaseline: 'middle',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fontSize: '12',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fontWeight: 'bold',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fill: '#2c3e50'</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, displayHour);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalCoreRevenue = Object.values(currentData.hourlyData).reduce((sum, data) =&gt; sum + data.revenue, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalRevenue = totalCoreRevenue + currentData.eveningRevenue;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const eveningPercentage = ((currentData.eveningRevenue / totalRevenue) * 100).toFixed(1);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const getLegendColors = (locationColor) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (locationColor === 'red') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return ['rgb(255, 230, 230)', 'rgb(255, 180, 180)', 'rgb(255, 100, 100)', 'rgb(220, 50, 50)', 'rgb(150, 20, 20)'];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (locationColor === 'blue') {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return ['rgb(230, 240, 255)', 'rgb(180, 200, 255)', 'rgb(100, 150, 255)', 'rgb(50, 100, 220)', 'rgb(20, 50, 150)'];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return ['rgb(230, 255, 230)', 'rgb(180, 255, 180)', 'rgb(100, 255, 100)', 'rgb(50, 200, 50)', 'rgb(20, 120, 20)'];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return React.createElement('div', { className: 'dashboard-container' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>React.createElement('div', { key: 'header', className: 'dashboard-header' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>React.createElement('h1', { key: 'title' }, 'Maven Roasters'),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>React.createElement('p', { key: 'subtitle' }, 'Interactive Hourly Revenue Efficiency Dashboard')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>React.createElement('div', { key: 'content', className: 'dashboard-content' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>React.createElement('div', { key: 'tabs', className: 'location-tabs' },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Object.keys(locationData).map((location) =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>React.createElement('button', {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>key: location,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>className: `location-tab ${selectedLocation === location ? 'active' : ''}`,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>onClick: () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>setSelectedLocation(location);</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>setSelectedHour(null);</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}, location)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>)</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>React.createElement('div', { key: 'main', className: 'dashboard-main' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>React.createElement('div', { key: 'clock-section', className: 'clock-section' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>React.createElement('div', { key: 'clock-container', className: 'clock-container' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('svg', { key: 'svg', width: '300', height: '300' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>...Object.entries(currentData.hourlyData).map(([hour, data]) =&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>renderClockSegment(hour, data)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>...renderHourLabels(),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('circle', {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>key: 'center',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>cx: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>cy: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>r: '30',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>fill: 'white',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>stroke: '#2c3e50',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>strokeWidth: '3'</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('text', {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>key: 'center-text1',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>x: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>y: '145',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>textAnchor: 'middle',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>fontSize: '12',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>fontWeight: 'bold',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>fill: '#2c3e50'</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}, '6AM-6PM'),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('text', {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>key: 'center-text2',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>x: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>y: '160',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>textAnchor: 'middle',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>fontSize: '10',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>fill: '#6c757d'</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}, '$/HOUR'),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('line', {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>key: 'hand1',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>x1: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>y1: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>x2: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>y2: '50',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>stroke: '#2c3e50',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>strokeWidth: '4',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>strokeLinecap: 'round'</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>}),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('line', {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>key: 'hand2',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>x1: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>y1: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>x2: '150',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>y2: '250',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>stroke: '#2c3e50',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>strokeWidth: '3',</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>strokeLinecap: 'round'</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>selectedHour &amp;&amp; React.createElement('div', { key: 'selected-card', className: 'info-card selected-card' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'selected-title', className: 'card-title' },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>`${currentData.hourlyData[selectedHour].label === '6' ? '6:00' : currentData.hourlyData[selectedHour].label === '12' ? '12:00 PM' : parseInt(currentData.hourlyData[selectedHour].label) &lt; 6 ? `${currentData.hourlyData[selectedHour].label}:00 PM` : `${currentData.hourlyData[selectedHour].label}:00 AM`} Details`),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'selected-content', className: 'card-content' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'selected-revenue', className: 'metric-row' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'selected-revenue-label', className: 'metric-label' }, 'Revenue:'),</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'selected-revenue-value', className: 'metric-value' }, `${currentData.hourlyData[selectedHour].revenue.toLocaleString()}`)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'selected-efficiency', className: 'metric-row' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'selected-efficiency-label', className: 'metric-label' }, 'Efficiency:'),</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'selected-efficiency-value', className: 'metric-value' }, `${currentData.hourlyData[selectedHour].efficiency.toFixed(1)}/hour`)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>React.createElement('div', { key: 'instructions-card', className: 'info-card instructions-card' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'instructions-title', className: 'card-title' }, 'Instructions'),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'instructions-content', className: 'card-content' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>'• Each slice shows efficiency ($/hour)',</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('br'),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>'• Click any slice for details',</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('br'),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>'• Switch locations using tabs above'</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                </span>])</p>
+<p class="p1"><span class="Apple-converted-space">            </span>]);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const root = ReactDOM.createRoot(document.getElementById('root'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>root.render(React.createElement(EfficiencyDashboard));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'clock-info', className: 'clock-info' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'location-name', className: 'location-name' }, selectedLocation),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'operating-hours', className: 'operating-hours' },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>`Operating: 6AM - ${currentData.closingTime}`)</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>React.createElement('div', { key: 'legend', className: 'legend-container' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'legend-title', className: 'legend-title' }, 'Efficiency Scale'),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'legend-gradient', className: 'legend-gradient' },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>getLegendColors(currentData.color).map((color, index) =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('div', {</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>key: index,</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>className: 'legend-item',</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>style: { backgroundColor: color }</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>)</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'legend-labels', className: 'legend-labels' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('span', { key: 'low' }, 'Low'),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('span', { key: 'high' }, 'High')</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'range', style: { textAlign: 'center', marginTop: '8px', fontSize: '0.8rem', color: '#6c757d' } },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>'$50-300/hour range')</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>React.createElement('div', { key: 'info-panel', className: 'info-panel' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>React.createElement('div', { key: 'evening-card', className: 'info-card evening-card' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'evening-title', className: 'card-title' }, 'Evening Hours Analysis'),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'evening-content', className: 'card-content' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'period', className: 'metric-row' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'period-label', className: 'metric-label' }, 'Time Period:'),</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'period-value', className: 'metric-value' }, `6PM - ${currentData.closingTime}`)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'revenue', className: 'metric-row' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'revenue-label', className: 'metric-label' }, 'Evening Revenue:'),</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'revenue-value', className: 'metric-value' }, `$${currentData.eveningRevenue.toLocaleString()}`)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'efficiency', className: 'metric-row' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'efficiency-label', className: 'metric-label' }, 'Evening Efficiency:'),</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'efficiency-value', className: 'metric-value' }, `$${currentData.eveningEfficiency.toFixed(1)}/hour`)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'percentage', className: 'metric-row' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'percentage-label', className: 'metric-label' }, '% of Total Revenue:'),</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>React.createElement('span', { key: 'percentage-value', className: 'metric-value' }, `${eveningPercentage}%`)</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>React.createElement('div', { key: 'highlight', className: 'highlight-text' },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>eveningPercentage &lt; 10 ?<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>"Low evening efficiency - consider early closure" :</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>"Moderate evening performance"</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>)</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>])</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>]),</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>React.createElement('div', { key: 'comparison-card', className: 'info-card comparison-card' }, [</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('div', { key: 'comparison-title', className: 'card-title' }, 'Location Comparison'),</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>React.createElement('ul', { key: 'comparison-list', className: 'comparison-list' },<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Object.entries(locationData).map(([location, data]) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>const avgEfficiency = Object.values(data.hourlyData).reduce((sum, h) =&gt; sum + h.efficiency, 0) / Object.keys(data.hourlyData).length;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>return React.createElement('li', {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>key: location,<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>className: 'comparison-item'<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>}, [</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>React.createElement('span', {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                                </span>key: 'location',<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                                </span>className: location === selectedLocation ? 'location-highlight' : ''<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>}, `${location}:`),</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>React.createElement('span', { key: 'avg' }, `$${avgEfficiency.toFixed(1)}/hr avg`)</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>]);</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>)</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>]),</p>
+</body>
+</html>
